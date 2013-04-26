@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/black">
+
+    <Button
+        android:id="@+id/home_address_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_home_address" />
+
+    <Button
+        android:id="@+id/work_address_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/work_address_set" />
+
+    <Button
+        android:id="@+id/legal_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/legal_notice" />
+
+"
+    
+
+</LinearLayout>
