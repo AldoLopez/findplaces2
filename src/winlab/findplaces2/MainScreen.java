@@ -103,9 +103,12 @@ public class MainScreen extends ListActivity{
 		//insertStopOff.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.activity_main_screen));		
 		final ArrayAdapter<CharSequence> stringAdapter  = ArrayAdapter.createFromResource(this, R.array.PlaceTypes, android.R.layout.simple_spinner_dropdown_item);		
 		stringAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		insertStopOff.setAdapter(stringAdapter);
-		
+		insertStopOff.setAdapter(stringAdapter);		
 
+
+		final String[] hasToBeInHere = getResources().getStringArray(R.array.PlaceTypes); 
+		
+		
 		 /* on click of button the text from the text view will get inserted 
 		 * into the listview with the following snip of code
 		 */
@@ -138,10 +141,16 @@ public class MainScreen extends ListActivity{
 		newPlaceButton.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				
-				String newPlace = insertStopOff.getText().toString();
+				ArrayList<String> inHere = new ArrayList<String>();
+				for(int i=0; i<hasToBeInHere.length; i++){
+					inHere.add(hasToBeInHere[i]);
+				}
+				String newPlace = insertStopOff.getText().toString();				
 				if(newPlace.equals("")){
 					showToast("Please enter a stopoff to add.");			
+				}
+				else if(!inHere.contains(newPlace)){
+					showToast("Please only enter places from dropdown");
 				}
 				else{				
 					

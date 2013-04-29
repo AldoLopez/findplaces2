@@ -58,7 +58,6 @@
         <item>	furniture store	</item>
         <item>	gas station	</item>
         <item>	general contractor	</item>
-        <item>	geocode	</item>
         <item>	grocery or supermarket	</item>
         <item>	gym	</item>
         <item>	hair care	</item>
@@ -112,22 +111,7 @@
         <item>	travel agency	</item>
         <item>	university	</item>
         <item>	veterinary care	</item>
-        <item>	zoo	</item>
-        <item>  yogurt shop	</item>
-        <item>	sporting goods store	</item>
-        <item>	burgers	</item>
-        <item>	hotel	</item>
-        <item>	motel	</item>
-        <item>	arcade	</item>
-        <item>	video games store	</item>
-        <item>	snowboarding	</item>
-        <item>	waterpark	</item>
-        <item>	music store	</item>
-        <item>	lounge	</item>
-        <item>	computer store	</item>
-        <item>	fast food	</item>
-        <item>	coffee shop	</item>
-        <item> 	ice cream shop 	</item>        
+        <item>	zoo	</item>      
     </string-array>
         <string name="route_now">Route</string>
         <string name="empty_string"></string>
