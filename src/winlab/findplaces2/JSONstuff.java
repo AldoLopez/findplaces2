@@ -224,14 +224,17 @@ public class JSONstuff extends Activity{
 							//ArrayList<JSONObject> placesJSONArray; //= 
 							ReturnHelper rh = getPlacesArray(ll);
 							placesJSONArray = rh.getJSONArray();
-							
+							Log.e("placesJSONARRAY", placesJSONArray.toString());
 							
 							try{
 						    	 for(int k = 0; k<placesJSONArray.size(); k++){
 									Log.e("for", "iteration " + k);
 									JSONObject obj =  placesJSONArray.get(k);
+										Log.e("obj JSONOBject", obj.toString());
 									JSONArray results = obj.getJSONArray("results");
 										Log.e("results JSONArray", results.toString());
+								
+										
 									JSONObject place = results.getJSONObject(0);
 										Log.e("JSONObject place	", place.toString());
 									JSONObject geometry = place.getJSONObject("geometry");
@@ -255,8 +258,10 @@ public class JSONstuff extends Activity{
 //									}
 									PlaceLocations pL = new PlaceLocations(name, placeLat, placeLng, rh.getType(), address);
 									Log.e("placesLocations name", name);
-									places.add(pL);
-									Log.e("places", places.get(0).getName());												
+									if(!places.contains(pL)){
+										places.add(pL);
+										Log.e("places", places.get(0).getName());
+									}
 
 									//second place
 									place = results.getJSONObject(1);
@@ -282,8 +287,10 @@ public class JSONstuff extends Activity{
 //									}
 									PlaceLocations pL2 = new PlaceLocations(name, placeLat, placeLng, rh.getType(), address);
 									Log.e("placesLocations name", name);
-									places.add(pL2);
-									Log.e("places", places.get(1).getName());			
+									if(!places.contains(pL2)){
+										places.add(pL2);
+										Log.e("places", places.get(1).getName());
+									}
 									
 									//third place
 									place = results.getJSONObject(1);
@@ -309,8 +316,10 @@ public class JSONstuff extends Activity{
 //									}
 									PlaceLocations pL3 = new PlaceLocations(name, placeLat, placeLng, rh.getType(), address);
 									Log.e("placesLocations name", name);
-									places.add(pL3);
-									Log.e("places", places.get(2).getName());
+									if(!places.contains(pL3)){
+										places.add(pL3);
+										Log.e("places", places.get(2).getName());
+									}
 								}
 					    	 }catch(JSONException e){
 					    		 e.printStackTrace();
