@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.Html;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 
@@ -17,11 +19,13 @@ public class PolyLine_Encoder {
 	private ArrayList<Double> latitudes;
 	private ArrayList<Double> longitudes;
 	private Polyline route;
+	private ArrayList<String> routeDirections;
 	
 	public PolyLine_Encoder(JSONObject jsonObject){
 		points = new ArrayList<LatLng>();
 		latitudes = new ArrayList<Double>();
 		longitudes = new ArrayList<Double>();
+		routeDirections = new ArrayList<String>();
 		originalObject = jsonObject;
 	}
 	
@@ -53,7 +57,9 @@ public class PolyLine_Encoder {
 				longitudes.add(lng);
 				LatLng LL = new LatLng(lat, lng);
 				points.add(LL);
-				
+				String h = step.getString("html_instructions");
+				h = Html.fromHtml(h).toString();
+				routeDirections.add(h);
 				//end location and add to arraylists
 				JSONObject endLocation = step.getJSONObject("end_location");
 				lat = endLocation.getDouble("lat");
@@ -66,4 +72,8 @@ public class PolyLine_Encoder {
 		}
 		return points;
 	}	
+	
+	public ArrayList<String> getDirections(){
+		return routeDirections;
+	}
 }

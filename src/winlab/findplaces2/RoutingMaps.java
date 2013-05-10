@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.internal.IPolylineDelegate;
+import com.google.android.maps.MapActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -48,6 +49,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.webkit.GeolocationPermissions;
+import android.widget.TextView;
 import android.widget.Toast;
 public class RoutingMaps extends Activity{	
 	
@@ -55,11 +57,13 @@ public class RoutingMaps extends Activity{
 	public Context ctx = this;
 	public Geocoder geo;
 	public ArrayList<ArrayList<LatLng>> places; //array list of routes
+	public ArrayList<ArrayList<String>> routeDirections; //turn by turn directions in string arrays
 	public ArrayList<String> typeStrings; //arrayList of types
 	public ArrayList<ArrayList<Polyline>> polyLines;
 	private ArrayList<PlaceLocations> placeLocations;
 	private ArrayList<String> addresses;
 	private ArrayList<String> parallelURLs;
+	TextView redText, blueText, greenText;
 	
 	
 	@Override
@@ -74,6 +78,10 @@ public class RoutingMaps extends Activity{
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         geo = new Geocoder(ctx);
         places = new ArrayList<ArrayList<LatLng>>();
+        routeDirections = new ArrayList<ArrayList<String>>();
+//        redText = (TextView) findViewById(R.id.red_text);
+//        blueText = (TextView) findViewById(R.id.blue_text);
+//        greenText = (TextView) findViewById(R.id.green_text);
         if(mMap != null){        	
         	mMap.setMyLocationEnabled(true);
         	mMap.isMyLocationEnabled();
@@ -158,6 +166,7 @@ public class RoutingMaps extends Activity{
 			//array list of lists of places in order they will be visited
 			ArrayList<LatLng> llArray = new ArrayList<LatLng>();
 			ArrayList<LatLng> llArray2 = new ArrayList<LatLng>();
+			ArrayList<String> directionsTBT = new ArrayList<String>();
 			for(int i=0; i<pl[0].size(); i++){
 				Log.e("name and address", pl[0].get(i).getName() + " " + pl[0].get(i).getAddress());
 			}
@@ -301,8 +310,10 @@ public class RoutingMaps extends Activity{
 					try{
 						jsonObject = new JSONObject(jsonString);
 						PolyLine_Encoder ple = new PolyLine_Encoder(jsonObject);
-						llArray2 = ple.getPolyline();
+						llArray2 = ple.getPolyline();						
 						places.add(llArray2);
+						directionsTBT = ple.getDirections();
+						routeDirections.add(directionsTBT);
 					}catch(JSONException e){
 						e.printStackTrace();
 					}
@@ -320,17 +331,24 @@ public class RoutingMaps extends Activity{
 			//for(int i =0; i<places.size(); i++){
 			Polyline p1 = mMap.addPolyline(new PolylineOptions().addAll(places.get(0)).geodesic(true));
 				p1.setColor(Color.RED);				
+				
+			
 			Polyline p2 = mMap.addPolyline(new PolylineOptions().addAll(places.get(1)).geodesic(true));
 				p2.setColor(Color.BLUE);
+			
+			
 			Polyline p3 = mMap.addPolyline(new PolylineOptions().addAll(places.get(2)).geodesic(true));
-				p3.setColor(Color.CYAN);
-			Polyline p4 = mMap.addPolyline(new PolylineOptions().addAll(places.get(3)).geodesic(true));
-				p4.setColor(Color.GREEN);
-				Log.e("size of places", "size of places is " + places.size());
+				p3.setColor(Color.GREEN);
+			
+			
+//			Polyline p4 = mMap.addPolyline(new PolylineOptions().addAll(places.get(3)).geodesic(true));
+//				p4.setColor(Color.GREEN);
+//				Log.e("size of places", "size of places is " + places.size());
 			//}
 		
 		}
 }
+	
 	
 	private String getJSON(String urlString){
 		URL url;
@@ -496,4 +514,5 @@ public class RoutingMaps extends Activity{
 	void showToast(String s){
 		Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
 	}
+
 }

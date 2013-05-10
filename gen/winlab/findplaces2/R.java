@@ -133,7 +133,10 @@ containing a value of this type.
     }
     public static final class color {
         public static final int black=0x7f060000;
+        public static final int blue=0x7f060003;
+        public static final int green=0x7f060004;
         public static final int grey=0x7f060001;
+        public static final int red=0x7f060002;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 

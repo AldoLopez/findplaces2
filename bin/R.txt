@@ -14,7 +14,10 @@ int attr uiZoomGestures 0x7f01000b
 int attr useViewLifecycle 0x7f01000c
 int attr zOrderOnTop 0x7f01000d
 int color black 0x7f060000
+int color blue 0x7f060003
+int color green 0x7f060004
 int color grey 0x7f060001
+int color red 0x7f060002
 int dimen activity_horizontal_margin 0x7f070000
 int dimen activity_vertical_margin 0x7f070001
 int drawable ic_launcher 0x7f020000
