@@ -435,12 +435,11 @@ public class MainScreen extends ListActivity{
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch(item.getItemId()){
-		case R.id.action_settings:
+		if(item.getItemId() == R.id.action_settings){
 			Intent i = new Intent(this, Settings.class);
 			startActivity(i);
 			return true;
-		default:
+		}else{
 			return super.onOptionsItemSelected(item);
 		}
 	}

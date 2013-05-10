@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.internal.IPolylineDelegate;
-import com.google.android.maps.MapActivity;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -85,8 +85,7 @@ public class RoutingMaps extends Activity{
         if(mMap != null){        	
         	mMap.setMyLocationEnabled(true);
         	mMap.isMyLocationEnabled();
-        	mMap.getMyLocation();
-        	
+        	mMap.getMyLocation();        	
         	
         	ArrayList<Address> address = new ArrayList<Address>();
         	double lat, lon;
@@ -411,6 +410,7 @@ public class RoutingMaps extends Activity{
 		try{
 			Cursor c = db.rawQuery("SELECT name FROM placesToGoArray", null);
 			c.moveToFirst();
+			db.close();
 			return c;
 		}
 		catch(android.database.sqlite.SQLiteException e){
